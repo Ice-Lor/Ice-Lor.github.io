@@ -1,0 +1,55 @@
+@font-face {
+    font-family: Minecraft;
+    src: url(fonts/MinecraftRegular-Bmg3.otf),
+            url(fonts/MinecraftBold-nMK1.otf),
+            url(fonts/MinecraftBoldItalic-1y1e.otf),
+            url(fonts/MinecraftItalic-R8Mo.otf);
+}
+a:link {
+        color: palevioletred;
+        text-decoration: none;
+    }
+a:hover{
+    color: red;
+    text-decoration: underline;
+}
+body{
+    font-family: Minecraft, sans-serif;
+}
+
+.button-link a:link,
+.button-link a:visited
+{
+    display: inline-block;
+    background-color: rgb(222, 136, 24);
+    color:rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+.button-link a:hover,
+.button-link a:visited
+{
+    display: inline-block;
+    background-color: rgb(222, 24, 24);
+    color:rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navbar ul
+{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.navbar li
+{
+    display: block;
+    width: 500px;
+    margin-top: 2px;
+    padding-left: 10px;
+    color: white;
+    background-color: salmon;
+}
