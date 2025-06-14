@@ -46,10 +46,9 @@ body{
 
 .navbar li
 {
-    display: block;
-    width: 490px;
+    display: inline-block;
     margin-top: 2px;
-    padding-left: 10px;
+    padding: 5px;
     color: white;
     background-color: salmon;
 }
