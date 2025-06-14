@@ -27,8 +27,7 @@ body{
     text-align: center;
     text-decoration: none;
 }
-.button-link a:hover,
-.button-link a:visited
+.button-link a:hover
 {
     display: inline-block;
     background-color: rgb(222, 24, 24);
