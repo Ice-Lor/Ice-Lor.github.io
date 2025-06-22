@@ -5,7 +5,11 @@
             url(fonts/MinecraftBoldItalic-1y1e.otf),
             url(fonts/MinecraftItalic-R8Mo.otf);
 }
-a:link {
+html,body{
+    margin: 0;
+    padding: 0;
+}
+a:link, a:visited {
         color: palevioletred;
         text-decoration: none;
     }
@@ -79,3 +83,52 @@ nav a:link
     border: 1px solid black;
     background-color: yellow;
 }
+
+.navigation-bar
+{   
+    list-style: none;
+    overflow: hidden;
+    background-color: #000000;
+    width: 100%;
+    padding: 0;
+    margin: 0px;
+}
+
+.navigation-bar li
+{
+    float: left;
+}
+.navigation-bar li:hover
+{
+    background-color: gray;
+}
+
+.navigation-bar a:link,
+.navigation-bar :visited
+{
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    display: block;
+    color: #FFFFFF;
+    padding: 10px 30px;
+}
+
+.navigation-bar a.active    
+{
+    background-color: gray;
+    color: rgb(31, 255, 1);
+}
+
+.Gallery
+        {
+            gap: 10px;
+            display: flex
+        }
+        .Gallery img
+        {
+            border: 1px solid black;
+            width: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+        }

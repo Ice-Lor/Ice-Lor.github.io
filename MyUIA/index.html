@@ -11,18 +11,6 @@
         {
             background-color: white;
         }
-        .Gallery
-        {
-            gap: 10px;
-            display: flex
-        }
-        .Gallery img
-        {
-            border: 1px solid black;
-            width: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
     </style>
 </head>
 <body>
@@ -32,8 +20,13 @@
                 <b>My UIA Family </b>
             </h1>
         </div>
+        <ul class="navigation-bar">
+            <li> <a href="index.html" class="active">First UIA Page</a></li>
+            <li> <a href="UIA.html">Gallery</a></li>
+            <li style="float: right;"> <a href="About.html">About</a></li>
+        </ul>
     </header>
-    <main>
+    <main style="margin: 5px;">
         <a href="#Main_content">Skip to main content</a>
         <h4 style="border: 1px solid black; margin:auto;padding-left: 20px; padding-right: 20px; text-align: center; display: inline-block;">
             Introduce
@@ -58,14 +51,6 @@
             You can know more about this cat by this link: 
             <a href="https://www.youtube.com/watch?v=EbaQ5sYYqHE" target="_blank" title="UIA Video">UIA Cat</a>
         </p>
-        <div>
-            <b>Gallery</b> <br>
-            <div class="Gallery">
-            <img src="images/Christmas_Cat.jpg" alt="UIA Cat with christmas hat">
-            <img src="images/uia-cat-meo-uia.gif" alt="Gif of UIA cat">
-            <img src="images/UIA_Tet.jpg" alt="UIA in Lunar New Year">
-            </div>
-        </div>
         <h3 id="Main_content">
             Achievement of UIA cat
         </h3>
