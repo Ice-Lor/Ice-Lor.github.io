@@ -1,57 +1,19 @@
 <!DOCTYPE html>
 <html>
-    <head style="color: aqua;">
-        <title>
-            My first page
-        </title>
-        <link rel="icon" type="image/jpg" href="Christmas_Cat.jpg">
-        <style>
-            .navbar ul  
-            {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                background-color: #f1f1f1;
-                width: 200px;
-            }
-            .navbar a
-            {
-                display: block;
-                text-decoration: none;
-                padding: 5px 10px;
-            }
-            .navbar a:hover
-            {
-                background-color: #555;
-                color: white;
-            }
-            .navbar a.active
-            {
-                background-color: Red;
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        He he he 
-        <h1>
-            Xem nao
-        </h1>
-        Hus hus <br>
-        <button>Open</button>
-        <p>
-            Alo ""
-        </p>
-        <img src="Christmas_Cat.jpg" alt="Cat" title="Alulu" width="100px" height="70px"> <br>
-        <a href="www.google.com">Google</a>
-        <div class="navbar">
-            <ul>
-                <li><a class = "active" href="#Option A">Option A</a></li>
-                <li><a href="#Option B">Option B</a></li>
-                <li><a href="#Option C">Option C</a></li>
-                <li><a href="#Option D">Option D</a></li>
-                <li><a href="#Option E">Option E</a></li>
-            </ul>
-        </div>
-    </body>
-</html>
+<body>
+<h1>JavaScript HTML Events</h1>
+<h2>The onclick Attribute</h2>
+
+<p>Click the button to display the date.</p>
+<button id="demo" onclick="displayDate()" style="color: blueviolet;">The time is?</button>
+
+<script>
+function displayDate() {
+  document.getElementById("demo").setAttribute("style", "color: red");
+}
+</script>
+
+<p></p>
+
+</body>
+</html> 

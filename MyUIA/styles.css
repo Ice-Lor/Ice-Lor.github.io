@@ -41,6 +41,28 @@ body{
     text-decoration: none;
 }
 
+.button-normal
+{
+    display: inline-block;
+    border-radius: 5px;
+    background-color: rgb(222, 136, 24);
+    color:rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button-normal:hover
+{
+    display: inline-block;
+    border-radius: 5px;
+    background-color: rgb(222, 24, 24);
+    color:rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
 .navbar ul
 {
     list-style: none;
