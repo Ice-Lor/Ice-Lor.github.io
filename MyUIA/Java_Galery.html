@@ -16,9 +16,9 @@
     <div style="margin: 5px;">
         <h1 style="text-align: center;"> First Event JavaScript </h1>
         <div style="display: flex; gap: 100px; margin: 0 10px; justify-content: center;">
-            <button class="button-normal" onclick="document.getElementById('Image1').style.display = 'block'">Click to display the first Image</button>
-            <button class="button-normal" onclick="document.getElementById('Image2').style.display = 'block'">Click to display the second Image</button>
-            <button class="button-normal" onclick="document.getElementById('Image3').style.display = 'block'">Click to display the final Image</button>
+            <button class="button-normal" onclick="document.getElementById('Image1').style.display = 'block'; this.style.display = 'none'">Click to display the first Image</button>
+            <button class="button-normal" onclick="document.getElementById('Image2').style.display = 'block'; this.style.display = 'none'">Click to display the second Image</button>
+            <button class="button-normal" onclick="document.getElementById('Image3').style.display = 'block'; this.style.display = 'none'">Click to display the final Image</button>
         </div>
         <div class="Gallery">
             <img src="images/Christmas_Cat.jpg" alt="Christmas_Cat" style="display: none;" id="Image1">
