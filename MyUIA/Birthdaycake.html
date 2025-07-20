@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng sinh nhật vợ</title>
+    <style>
+        body {
+            background-color: #fbc4ef;
+            font-family: 'MoreSugar', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        @font-face {
+            font-family: MoreSugar;
+            src: url(fonts/fonts_birthday/MoreSugar-Extras.otf) format('truetype');
+            src: url(fonts/fonts_birthday/MoreSugar-Regular.otf);
+            src: url(fonts/fonts_birthday/MoreSugar-Thin.otf);
+        }
+        .layout {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            justify-content: center;
+            align-items: center;
+        }
+        .heart {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: auto;
+        transition: bottom 3s linear;
+        pointer-events: none;
+        }
+        .button-normal
+        {
+            display: inline-block;
+            border-radius: 5px;
+            background-color: rgb(222, 24, 77);
+            color:rgb(255, 255, 255);
+            padding: 5px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button-normal:hover
+        {
+            display: inline-block;
+            border-radius: 5px;
+            background-color: rgb(222, 24, 24);
+            color:rgb(255, 255, 255);
+            padding: 5px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>
+        Chúc mừng sinh nhật vợ yêu của anh<br>
+        Chúc em luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống.<br>
+        Anh yêu em rất nhiều!<br>
+    </h3>
+    <div class="layout">
+        <div>
+            <img src="images/birthdaycake.gif" alt="birthdaycake" style="width: 100%; height: auto;">
+        </div>
+        <div>
+            Anh muốn gửi đến em một chiếc bánh sinh nhật thật đặc biệt, với những điều ngọt ngào nhất mà anh dành cho em.<br>
+            Ước gì anh có thể cùng bên em thổi nến và cắt bánh, nhưng dù không thể ở bên em trong ngày đặc biệt này, anh vẫn muốn em biết rằng anh luôn nghĩ về em.<br>
+            Chúc em có một ngày sinh nhật thật vui vẻ và ý nghĩa<br>
+            <br>
+            <div style="text-align: right;">
+            <strong>Yêu em nhiều moa moa :3</strong><br>
+            <strong>Chồng của em</strong>
+            <br>
+            <br>
+            </div>
+            <button id="heartBtn", class="button-normal", style="font-family: 'Moresugar';">I luv U</button>
+        </div>
+    </div>
+    <div id="heartContainer" style="position: relative; width: 100%; height: 100%;"></div>
+</body>
+</html>
+<script src="heart.js"></script>
