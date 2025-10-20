@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bó hoa + Nội dung — Sakura rain (x5, size 1/25, slow×6)</title>
+<style>
+  :root{ --bg:#f3fbff; --panel:#fff; --r:14px; }
+  *{ box-sizing:border-box }
+  html,body{ height:100% }
+  body{ margin:0; background:var(--bg); font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; color:#123 }
+
+
+  .stage{ position:relative; min-height:100vh; }
+
+  /* ===== LAYOUT ===== */
+  .page{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap:16px; padding:16px;
+  }
+  .panel{
+    background:var(--panel);
+    border-radius:var(--r);
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+    overflow:hidden;
+  }
+
+
+  .panel.left{
+    background: linear-gradient(180deg,#ecf8ff 0%,#d9f5ff 100%);
+    display:flex; align-items:flex-end; justify-content:stretch;
+  }
+  #rose-bouquet{ width:100%; height:100%; display:block; overflow:hidden; }
+  #rose-bouquet svg{ display:block; width:100%; height:100%; }
+
+
+  .right{ display:flex; flex-direction:column; }
+  .right header{ padding:18px 20px; border-bottom:1px solid #eaf1f6; background:#fff; }
+  .right .content{ padding:20px; line-height:1.6; }
+  .btn{ background:#0ea5a5; color:#fff; border:0; border-radius:10px; padding:10px 14px; cursor:pointer; }
+
+  /* ===== Hoa: animation & style ===== */
+  .rose .outer,.rose .mid,.rose .inner,.rose .bud{ opacity:0; transform:scale(.6); animation:bloom .9s ease-out forwards; }
+  .rose .mid{ animation-delay:.18s } .rose .inner{ animation-delay:.34s } .rose .bud{ animation-delay:.5s }
+  @keyframes bloom{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+
+  /* ===== GỐC ===== */
+  #bunch{
+    transform-box:fill-box; transform-origin:0px 0px;
+    transform: translate(400px,520px);      
+    animation: none !important;             
+  }
+
+  .stem-core{ stroke:url(#stemGrad); stroke-width:16; fill:none; stroke-linecap:round }
+  .stem-highlight{ stroke:url(#stemEdge); stroke-width:6; fill:none; stroke-linecap:round; opacity:.5 }
+
+  /* ===== NHÁNH + BÔNG ===== */
+  #heads{
+    transform-origin: 0px 0px;              
+    --hfrom: -0.8deg;                       
+    --hto:    0.8deg;
+    --hdur:   6s;
+    animation: headsWobble var(--hdur) ease-in-out infinite alternate;
+  }
+  .stage.storm #heads{
+    --hfrom: -3deg;                         
+    --hto:    3deg;
+    --hdur:   1.6s;
+  }
+  @keyframes headsWobble{
+    from{ transform: rotate(var(--hfrom)); }
+    to  { transform: rotate(var(--hto));   }
+  }
+
+ 
+  #camera{
+    transform: translate(var(--cam-x, 0px), var(--cam-y, 0px)) scale(var(--cam-scale, 1));
+    transform-origin: 50% 70%;
+    transition: transform .4s ease;
+  }
+
+  
+  .fx-layer{ position:absolute; inset:0; pointer-events:none; }
+  .fx-layer svg{ width:100%; height:100%; display:block; }
+
+  .sakura{
+    transform-box: fill-box; transform-origin:center;
+    opacity:0;
+    animation: sakura-path var(--dur,7000ms) linear forwards;
+  }
+
+  @keyframes sakura-path{
+    0%{
+      opacity:0;
+      transform: translate(var(--sx), -60px) rotate(var(--r0)) scale(var(--sc));
+    }
+    10%{ opacity:.95; }
+    25%{
+      transform: translate(
+                 calc(var(--sx) + var(--dx)*.25 + var(--sw)),
+                 calc(var(--H)*.25))
+               rotate(var(--r1)) scale(var(--sc));
+    }
+    50%{
+      transform: translate(
+                 calc(var(--sx) + var(--dx)*.50 - var(--sw)),
+                 calc(var(--H)*.50))
+               rotate(var(--r2)) scale(var(--sc));
+    }
+    75%{
+      transform: translate(
+                 calc(var(--sx) + var(--dx)*.75 + var(--sw)),
+                 calc(var(--H)*.75))
+               rotate(var(--r3)) scale(var(--sc));
+    }
+    100%{
+      opacity:.9;
+      transform: translate(
+                 calc(var(--sx) + var(--dx)),
+                 var(--H))
+               rotate(var(--r4)) scale(var(--sc));
+    }
+  }
+
+  /* --- Desktop mặc định --- */
+  @media (min-width:901px){
+    #rose-bouquet{ --cam-x: 20px; --cam-y: 130px; --cam-scale: 1; }
+  }
+  /* --- Laptop 1920×1200 --- */
+  @media (min-width:1800px) and (min-height:1100px){
+    .page{ grid-template-columns: 1.6fr 1fr; }
+    #rose-bouquet{ --cam-x: 80px; --cam-y: 170px; --cam-scale: 1; }
+  }
+
+  /* ===== MOBILE: FLEX-COLUMN + ĐẢO THỨ TỰ ===== */
+  @media (max-width:430px) and (orientation:portrait){
+    .stage{ min-height:100dvh; }
+    .page{ display:flex; flex-direction:column; min-height:100dvh; padding:16px 16px 0; gap:16px; }
+    .right{ order:1; } .left { order:2; height:min(54svh,560px); }
+    .panel.left{ align-items:flex-end; }
+    #rose-bouquet{ --cam-scale:1.12; --cam-x:0px; --cam-y:240px; }
+  }
+  @media (max-height:460px) and (orientation:landscape){
+    .stage{ min-height:100dvh; }
+    .page{ display:flex; flex-direction:column; min-height:100dvh; padding:12px 12px 0; gap:12px; }
+    .right{ order:1; } .left { order:2; height:60svh; }
+    .panel.left{ align-items:flex-end; }
+    #rose-bouquet{ --cam-scale:1.08; --cam-x:10px; --cam-y:170px; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  
+  <div class="fx-layer" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" id="fxSvg">
+      <defs>
+        
+        <path id="sakuraPetal"
+        d="M0,-10
+            C -12,-24 -36,-20 -36,-5
+            -36,9 -22,19 0,33
+            22,19 36,9 36,-5
+            36,-20 12,-24 0,-10 Z"
+        fill="url(#sakuraGrad)"/>
+        <radialGradient id="sakuraGrad" cx="35%" cy="30%" r="80%">
+          <stop offset="0%" stop-color="#ffe3ec"/>
+          <stop offset="55%" stop-color="#ffb7c5"/>
+          <stop offset="100%" stop-color="#ff88a5"/>
+        </radialGradient>
+      </defs>
+      <g id="fxRoot"></g>
+    </svg>
+  </div>
+
+  <!-- NỘI DUNG CHÍNH  -->
+  <main class="page">
+    
+    <section class="panel left">
+      <div id="rose-bouquet">
+  
+        <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMax meet">
+          <defs>
+            <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#2f9d62"/><stop offset="100%" stop-color="#1f6f46"/>
+            </linearGradient>
+            <linearGradient id="stemEdge" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(255,255,255,.25)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <radialGradient id="petalGrad" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#ffd7e0"/><stop offset="55%" stop-color="#ff9ab1"/><stop offset="100%" stop-color="#ff5a8a"/>
+            </radialGradient>
+            <linearGradient id="sepalGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#34b36a"/><stop offset="100%" stop-color="#289457"/>
+            </linearGradient>
+            <path id="petal" d="M0,10 C-40,-30 -60,-70 -10,-80 C-2,-58 -2,-40 0,-30 C2,-40 2,-58 10,-80 C60,-70 40,-30 0,10 Z"/>
+            <path id="petalInner" d="M0,6 C-28,-20 -42,-46 -8,-54 C-2,-40 -2,-28 0,-22 C2,-28 2,-40 8,-54 C42,-46 28,-20 0,6 Z"/>
+            <path id="bud" d="M0,-10 c12,-8 26,-6 30,6 c6,18 -12,30 -26,24 c-16,-6 -18,-24 -4,-36 Z"/>
+          </defs>
+
+          <g id="camera">
+            <g id="bunch">
+              <g id="heads">
+                <g class="flower" data-x="-190" data-y="-300" data-scale="1.05"></g>
+                <g class="flower" data-x="-110" data-y="-360" data-scale="1.15"></g>
+                <g class="flower" data-x="0"    data-y="-380" data-scale="1.25"></g>
+                <g class="flower" data-x="110"  data-y="-360" data-scale="1.15"></g>
+                <g class="flower" data-x="190"  data-y="-300" data-scale="1.05"></g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    
+    <section class="panel right">
+      <header><h2>Chúc em yêu 20/10 thật vui vẻ</h2></header>
+      <div class="content">
+        <p>Chúc em bé của anh có 1 ngày 20/10 thật vui vẻ :3</p>
+        
+        <p>Mong rằng mọi điều tốt đẹp nhất sẽ tới với em moa moa </p>
+
+        <p>Không cần chúc bé iu của anh xinh đẹp bởi đó là mặc định của em😏</p>
+
+        <p>Anh yêu em nhìu lắm hẹ hẹ</p>
+
+        <img src="images/Wife.jpeg" alt="Ảnh vợ">
+
+        <p>-=-Anh yêu của em-=-</p>
+        <button class="btn" id="btnSakura">Thả cánh hoa 🌸</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+
+const SVG_NS='http://www.w3.org/2000/svg', XLINK='http://www.w3.org/1999/xlink';
+const root=document.getElementById('rose-bouquet');
+const heads=document.getElementById('heads');
+
+
+function makeRoseWithStem(x,y,s=1,orderIndex=0){
+  const g=document.createElementNS(SVG_NS,'g');
+
+  const bend=Math.max(10,Math.abs(x)*0.35);
+  const cx=(x>=0?1:-1)*bend, cy=y*0.55-40;
+  const d=`M0,0 Q ${cx},${cy} ${x},${y+18*s}`;
+
+  const core=document.createElementNS(SVG_NS,'path');
+  core.setAttribute('d',d); core.setAttribute('class','stem-core');
+  const hi=document.createElementNS(SVG_NS,'path');
+  hi.setAttribute('d',d); hi.setAttribute('class','stem-highlight');
+  g.appendChild(core); g.appendChild(hi);
+
+  const head=document.createElementNS(SVG_NS,'g');
+  head.setAttribute('transform',`translate(${x},${y}) scale(${s})`);
+
+  const sepal=document.createElementNS(SVG_NS,'path');
+  sepal.setAttribute('d','M0,18 c-24,-6 -40,-22 -44,-40 c18,6 34,0 44,-12 c10,12 26,18 44,12 c-4,18 -20,34 -44,40 Z');
+  sepal.setAttribute('fill','url(#sepalGrad)');
+  head.appendChild(sepal);
+
+  const outer=document.createElementNS(SVG_NS,'g'); outer.classList.add('outer');
+  for(let i=0;i<6;i++){ const u=document.createElementNS(SVG_NS,'use');
+    u.setAttributeNS(XLINK,'href','#petal'); u.setAttribute('fill','url(#petalGrad)');
+    u.setAttribute('transform',`rotate(${i*60})`); outer.appendChild(u);}
+  head.appendChild(outer);
+
+  const mid=document.createElementNS(SVG_NS,'g'); mid.classList.add('mid');
+  for(let i=0;i<5;i++){ const u=document.createElementNS(SVG_NS,'use');
+    u.setAttributeNS(XLINK,'href','#petal'); u.setAttribute('fill','url(#petalGrad)');
+    u.setAttribute('transform',`rotate(${30+i*72}) scale(.85) translate(0,-6)`); mid.appendChild(u);}
+  head.appendChild(mid);
+
+  const inner=document.createElementNS(SVG_NS,'g'); inner.classList.add('inner');
+  [0,120,240].forEach(r=>{ const u=document.createElementNS(SVG_NS,'use');
+    u.setAttributeNS(XLINK,'href','#petalInner'); u.setAttribute('fill','url(#petalGrad)');
+    u.setAttribute('transform',`rotate(${r}) scale(.7) translate(0,-8)`); inner.appendChild(u);});
+  head.appendChild(inner);
+
+  const bud=document.createElementNS(SVG_NS,'use'); bud.classList.add('bud');
+  bud.setAttributeNS(XLINK,'href','#bud'); bud.setAttribute('fill','url(#petalGrad)');
+  head.appendChild(bud);
+
+  head.querySelectorAll('.outer,.mid,.inner,.bud').forEach((el,i)=>{
+    el.style.animationDelay=`${0.14*orderIndex + (i? i*0.16 : 0)}s`;
+  });
+
+  g.appendChild(head);
+  return g;
+}
+
+(function build(){
+  const placeholders=[...heads.querySelectorAll('.flower')];
+  placeholders.forEach((ph,idx)=>{
+    const x=+ph.getAttribute('data-x');
+    const y=+ph.getAttribute('data-y');
+    const s=+(ph.getAttribute('data-scale')||1);
+    const grp=makeRoseWithStem(x,y,s,idx);
+    heads.replaceChild(grp,ph);
+  });
+})();
+
+
+
+
+const stage = document.getElementById('stage');
+const fxRoot = document.getElementById('fxRoot');
+
+
+const SPEED_MS = 7000 * 6;
+
+const PETAL_MULTIPLIER = 1;
+
+function spawnSakuraParticle(H, W){
+  const g = document.createElementNS(SVG_NS,'g');
+  g.setAttribute('class','sakura');
+
+  const sx = Math.random() * W;                                     
+  const dx = (W*0.25 + Math.random()*W*0.25) * (Math.random() < .5 ? -1 : 1);
+  const sway = (8 + Math.random()*18) * (Math.random() < .5 ? -1 : 1);
+  const scale = 0.035 + Math.random()*0.025;
+  const dur   = SPEED_MS + Math.random()*1800;
+
+  const r0 = (Math.random()*60 - 30) + 'deg';
+  const r1 = (60 + Math.random()*120) + 'deg';
+  const r2 = (140 + Math.random()*120) + 'deg';
+  const r3 = (220 + Math.random()*140) + 'deg';
+  const r4 = (320 + Math.random()*160) + 'deg';
+
+  g.style.setProperty('--sx',  sx.toFixed(1)+'px');
+  g.style.setProperty('--dx',  dx.toFixed(1)+'px');
+  g.style.setProperty('--H',   (H+80).toFixed(1)+'px');
+  g.style.setProperty('--sw',  sway.toFixed(1)+'px');
+  g.style.setProperty('--sc',  scale.toFixed(3));
+  g.style.setProperty('--dur', dur+'ms');
+  g.style.setProperty('--r0', r0); g.style.setProperty('--r1', r1);
+  g.style.setProperty('--r2', r2); g.style.setProperty('--r3', r3); g.style.setProperty('--r4', r4);
+
+  const use = document.createElementNS(SVG_NS,'use');
+  use.setAttributeNS(XLINK,'href','#sakuraPetal');
+  use.setAttribute('fill','url(#sakuraGrad)');
+  g.appendChild(use);
+
+  fxRoot.appendChild(g);
+  setTimeout(()=> g.remove(), dur + 300);
+}
+
+function showerOnce(totalMs=SPEED_MS){
+  const rect = stage.getBoundingClientRect();
+  const W = rect.width, H = rect.height;
+
+  stage.classList.add('storm');
+
+  const tick = 100;
+  const batches = Math.floor(totalMs/tick);
+
+
+  const basePerBatch = Math.max(3, Math.round(W/420)) * PETAL_MULTIPLIER;
+
+  let t=0;
+  const timer = setInterval(()=>{
+    t++;
+    const n = basePerBatch + Math.floor(Math.random()*2);
+    for(let i=0;i<n;i++) spawnSakuraParticle(H, W);
+    if(t>=batches){
+      clearInterval(timer);
+      setTimeout(()=> stage.classList.remove('storm'), 300);
+    }
+  }, tick);
+}
+
+
+document.getElementById('btnSakura').addEventListener('click', ()=>{
+  showerOnce(SPEED_MS);
+});
+</script>
+</body>
+</html>
